@@ -3,8 +3,16 @@ var shopping=new Vue({
     data:{
         productLists:[],
         totalMoney:0,
+        checkall:false,
+        deleteFlag:false,
+        deleteProduct:'',
     },
-    components:{
+    filters:{//局部过滤器
+        Money:function (value,type) {
+            return "$"+value+type;
+        }
+    },
+    components:{//注册局部组件
 
     },
     mounted:function () {
@@ -45,6 +53,7 @@ var shopping=new Vue({
         },
         checked:function (item) {
             if(!item.checked){
+                //Vue.set(item,"checked",true);//全局注册
                 this.$set(item,"checked",true);//局部注册
                 this.calcTotalPrice();
             }else {
@@ -60,6 +69,44 @@ var shopping=new Vue({
                     _this.totalMoney+=item.productPrice*item.productQuantity;
                 }
             })
+        },
+        checkAll:function () {
+            var _this=this;
+            _this.checkall=!_this.checkall;
+            if(_this.checkall){
+                _this.productLists.forEach(function (value,index) {
+                    if(!value.checked){
+                        _this.checked(value);
+                    }else{
+                        value.checked=true;
+                    }
+                })
+            }else{
+                _this.productLists.forEach(function (value,index) {
+                    value.checked=false;
+                })
+            }
+            this.calcTotalPrice();
+
+        },
+        deletePro:function (item) {
+            this.deleteFlag=!this.deleteFlag;
+            this.deleteProduct=item;
+        },
+        cacel:function () {
+            this.deleteFlag=!this.deleteFlag;
+        },
+        sure:function () {
+            var index=this.productLists.indexOf(this.deleteProduct);
+            this.productLists.splice(index,1);//删除
+            this.deleteFlag=!this.deleteFlag;
+            this.calcTotalPrice();
         }
     }
-})
+});
+
+// Vue.filter({});//全局过滤器
+// Vue.component({});//全局组件
+// Vue.filter("Money",function (value,type) {
+//     return "$"+value+type;
+// })

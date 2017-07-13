@@ -60,7 +60,7 @@
                             </ul>
                         </div>
                         <ul class="cart-item-list">
-                            <li v-for="productList in productLists">
+                            <li v-for="(productList,index) in productLists">
                                 <div class="cart-tab-1">
                                     <div class="cart-item-check">
                                         <a href="javascript:void 0" class="item-check-btn" @click="checked(productList)" :class="{check:productList.checked}">
@@ -83,7 +83,7 @@
                                     </div>
                                 </div>
                                 <div class="cart-tab-2">
-                                    <div class="item-price" v-text="productList.productPrice"></div>
+                                    <div class="item-price">{{productList.productPrice | Money('元')}}</div> <!--2.0只有在双大括号里面使用过滤器-->
                                 </div>
                                 <div class="cart-tab-3">
                                     <div class="item-quantity">
@@ -102,7 +102,7 @@
                                 </div>
                                 <div class="cart-tab-5">
                                     <div class="cart-item-operation">
-                                        <a href="javascript:void 0" class="item-edit-btn">
+                                        <a href="javascript:void 0" class="item-edit-btn" @click="deletePro(productList)">
                                             <svg class="icon icon-del">
                                                 <use xlink:href="#icon-del"></use>
                                             </svg>
@@ -119,15 +119,15 @@
                     <div class="cart-foot-l">
                         <div class="item-all-check">
                             <a href="javascript:void 0">
-                                <label for="qx">
-                                    <span class="item-check-btn" >
+                                <label for="qx" >
+                                    <span class="item-check-btn" :class="{'check':checkall}" @click="checkAll">
                                         <svg class="icon icon-ok"><use xlink:href="#icon-ok"></use></svg>
                                     </span>
                                 </label>
-                                <span id="qx">全选</span>
+                                <span id="qx"  v-show="!checkall">全选</span>
                             </a>
                         </div>
-                        <div class="item-all-del">
+                        <div class="item-all-del" v-show="checkall">
                             <a href="javascript:void 0" class="item-del-btn" >
                                 <span >取消全选</span>
                             </a>
@@ -145,24 +145,24 @@
             </div>
         </div>
 
-        <div class="md-modal modal-msg md-modal-transition" id="showModal">
+        <div class="md-modal modal-msg md-modal-transition" :class="{'md-show':deleteFlag}" id="showModal">
             <div class="md-modal-inner">
                 <div class="md-top">
-                    <button class="md-close">关闭</button>
+                    <button class="md-close" @click="cacel()">关闭</button>
                 </div>
                 <div class="md-content">
                     <div class="confirm-tips">
                         <p id="cusLanInfo">你确认删除此订单信息吗?</p>
                     </div>
                     <div class="btn-wrap col-2">
-                        <button class="btn btn--m" id="btnModalConfirm" >Yes</button>
-                        <button class="btn btn--m btn--red" id="btnModalCancel">No</button>
+                        <button class="btn btn--m" id="btnModalConfirm" @click="sure()">Yes</button>
+                        <button class="btn btn--m btn--red" id="btnModalCancel" @click="cacel()">No</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="md-overlay"></div>
+        <div :class="{'md-overlay':deleteFlag}"></div>
     </div>
 </div>
 <script src="js/vue.min.js"></script>

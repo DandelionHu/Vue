@@ -35,6 +35,62 @@
             "imgSrc":"image/part-2.jpg"
           }
         ]
+      },
+      {
+        "productId":"600100002120",
+        "productName":"加多宝",
+        "productPrice":8,
+        "productQuantity":5,
+        "productImage":"images/2.jpg",
+        "parts":[
+          {
+            "partsId":"20001",
+            "partsName":"吸管",
+            "imgSrc":"image/part-2.jpg"
+          }
+        ]
+      },
+      {
+        "productId":"600100002120",
+        "productName":"加多宝",
+        "productPrice":8,
+        "productQuantity":5,
+        "productImage":"images/2.jpg",
+        "parts":[
+          {
+            "partsId":"20001",
+            "partsName":"吸管",
+            "imgSrc":"image/part-2.jpg"
+          }
+        ]
+      },
+      {
+        "productId":"600100002120",
+        "productName":"加多宝",
+        "productPrice":8,
+        "productQuantity":5,
+        "productImage":"images/2.jpg",
+        "parts":[
+          {
+            "partsId":"20001",
+            "partsName":"吸管",
+            "imgSrc":"image/part-2.jpg"
+          }
+        ]
+      },
+      {
+        "productId":"600100002120",
+        "productName":"加多宝",
+        "productPrice":8,
+        "productQuantity":5,
+        "productImage":"images/2.jpg",
+        "parts":[
+          {
+            "partsId":"20001",
+            "partsName":"吸管",
+            "imgSrc":"image/part-2.jpg"
+          }
+        ]
       }
     ]
   },
